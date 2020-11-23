@@ -1,0 +1,37 @@
+<form action="" method="POST">
+    <div class="form-group">
+        koekje<input type="text" id="koekje" name="koekje">
+    </div>
+    <div class="form-group">
+       merk<input type="text" id="merk"name="merk">
+    </div>
+    <div class="form-group">
+        rating<input type="text" id="rating" name="rating">
+    </div>
+    <input type="submit" value="Submit">
+</form>
+<table class='table table-striped' id='table'>
+    <thead class=>
+        <tr><th>Koekje</th><th>Merk</th><th>Rating</th><th>Time</th></tr>
+    </thead>
+    <tr id='row'></tr>
+</table>
+<script>
+    
+    fetch('/data.json')
+        .then(res => res.json())
+        .then(data => {
+            const row = document.getElementById('row');
+            data.forEach(el => {
+                console.log(el)
+                row.insertAdjacentHTML('beforebegin',
+                    `<tr>
+                        <td>${el.koekje}</td>
+                        <td>${el.merk}</td>
+                        <td>${el.rating}</td>
+                        <td>${el.time}</td>
+                    </tr>`);
+            })
+            row.remove()
+        }) 
+</script>
